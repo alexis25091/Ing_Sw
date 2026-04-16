@@ -1,0 +1,55 @@
+NexTask/
+│-- index.html
+│-- home.php
+│-- test_conexion.php
+│-- estilos/
+│    ├─ sesion.css
+│    └─ home.css
+│-- script/
+│    └─ procesar.php
+│    └─ home.php
+│-- recursos/
+│    └─ conexion.php
+│    └─ guardar_tarea.php
+│    └─ procesarInicio.php
+│    └─ salir_sesion.php
+│-- imagenes/
+│    └─ Logo.png
+
+
+
+
+SI MODIFICAS, DAME LOS CODIGOS COMPLETOS PARA PROBARLOS. NO SOLO PARTES.
+ TODO POR SEPARADO COMO TE LO PUSE. CADA RCHIVO ESTA SEPARADO
+ASI ESTA MI CARPETA PRINCIPAL
+NexTask/
+│-- index.html
+│-- home.php
+│-- calendario.php
+│-- historial.php
+│-- perfil.php
+│-- estilos/
+│    └─ calendario.php
+│    └─ historial.php
+│    └─ home.css
+│    └─ sesion.css
+│    └─ template.css
+│    └─ perfil.css
+│-- script/
+│    └─ calendario.php
+│    └─ historial.php
+│    └─ home.css
+│    └─ transicion.css
+│    └─ perfil.css
+│-- recursos/
+│    └─ conexion.php
+│    └─ guardar_tarea.php
+│    └─ procesarInicio.php
+│    └─ salir_sesion.php
+│    └─ actualizar_estado.php
+│    └─ editar_usuario.php
+│    └─ materias.php
+│-- imagenes/
+│    └─ Logo.png
+
+AHORA SI DAME LO QUE TE PEDI CON ESOS CAMBIOS

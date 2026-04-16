@@ -1,0 +1,284 @@
+/* Paleta de colores y tipografia */
+/* Define colores principales, secundarios, acentos y tipografía global */
+:root {
+    --primary-100: #7A8C99;  /* Gris-azul oscuro, para elementos importantes o títulos */
+    --primary-200: #A9BCC6;   /* Azul grisáceo, para subtítulos o separadores */
+    --primary-300: #C5D6E0;  /* Gris-azulado suave, para fondos secundarios o detalles */
+    --accent-100: #E1EBF0;   /* Azul muy claro, usado en tarjetas o paneles */
+    --accent-200: #F7FAFC;   /* Fondo general, casi blanco, para secciones principales */
+    --accent-300: #F2F7FA;       /* Fondo secundario de la página */
+    --text-negro: #2A2A2A;     /* Gris oscuro para textos normales */
+    --text-blanco: #FFFFFF;     /* Blanco, para textos sobre fondos oscuros */
+    --text-cafesito: #7B7977;
+    --tocar-boton: #7E7E7E;
+    --ver-boton: #B3B3B3;
+    --degr-100: #689EC2;
+    --degr-200: #909BAE;
+    --degr-300: #D5E8EF;
+    --degr-400: #1B5B7E;
+    --fuente-principal: 'Arial', sans-serif; /* Fuente general de toda la página */
+}
+
+/* Reset y estilos generales */
+* {
+    box-sizing: border-box;  /* Hace que padding y border no aumenten el tamaño real del elemento */
+    margin: 0;               /* Elimina margen por defecto de todos los elementos */
+    padding: 0;              /* Elimina padding por defecto de todos los elementos */
+    font-family: var(--fuente-principal); /* Aplica la fuente principal a todos los textos */
+}
+
+/* Body de la página */
+body {
+    display: flex;                   /* Flexbox para centrar contenido */
+    justify-content: center;         /* Centra horizontalmente */
+    align-items: center;             /* Centra verticalmente */
+    height: 100vh;                   /* Ocupa toda la altura visible de la ventana */
+    background: linear-gradient(90deg, var(--degr-100) 0%, var(--degr-200) 50%, var(--degr-300) 100%); /* Color de fondo de la página */
+}
+
+/* Panel animado */
+/* Contenedor principal que incluye login, registro y el panel deslizable */
+.panel-animado {
+    background-color: var(--accent-300); /* Color blanco del panel principal */
+    border-radius: 10px;               /* Bordes redondeados */
+    position: relative;                /* Para posicionar hijos con position: absolute */
+    overflow: hidden;                  /* Oculta contenido que sobresalga del panel */
+    width: 800px;                       /* Ancho total del panel */
+    max-width: 100%;                    /* Se adapta a pantallas más pequeñas */
+    min-height: 480px;                  /* Altura mínima para mantener diseño consistente */
+    box-shadow: 0 80px 30px rgba(0,0,0,0.2); /* Sombra suave alrededor del panel */
+}
+
+/* Panel de formularios */
+/* Contenedor de cada formulario (login y registro) dentro del panel animado */
+.panel-formulario {
+    position: absolute;                /* Posiciona sobre el panel animado */
+    top: 0;                             /* Alinea arriba del contenedor */
+    height: 100%;                       /* Ocupa toda la altura del panel */
+    width: 50%;                          /* Ocupa la mitad del panel */
+    display: flex;                      /* Flex para centrar contenido dentro del form */
+    justify-content: center;            
+    align-items: center;
+    transition: all 0.7s ease-in-out;   /* Transición suave al mover panel */
+    background: var(--accent-200);  /*Atras del formulario lo claro*/
+}
+
+/* Panel login */
+.panel-formulario.login {
+    left: 0;   /* Posicionado a la izquierda */
+    z-index: 2; /* Se asegura que esté encima del registro inicialmente */
+}
+
+/* Panel registro */
+.panel-formulario.registro {
+    left: 0;       
+    opacity: 0;    /* Invisible hasta activarse */
+    z-index: 1;    /* Detrás del login */
+}
+
+/* === LOS FORMULARIOS === */
+
+/* Paneles de los forms */
+.panel-formulario form {
+    /* background-color: var(--bg-100); /* Fondo blanco del formulario */
+    width: 100%;                     /* Ocupa todo el ancho del contenedor */
+    padding: 50px;                   /* Espacio interno */
+    display: flex;                   /* Flex para organizar inputs verticalmente */
+    flex-direction: column;          
+    text-align: center;              /* Centrar textos dentro del form */
+    background: var(--accent-200);  /* titulo y formulario*/
+}
+
+/* Título del formulario CUADRO TITULO FORM*/
+.panel-formulario form h2 {
+    margin-bottom: 20px;             /* Espacio debajo del título */
+    color: var(--text-negro);       /* Color del título */
+}
+
+/* Contenedor individual de cada input */
+.campo-input{
+    position: relative;        /* Permite posicionar el label dentro del contenedor */
+    width: 100%;               /* Ocupa todo el ancho del formulario */
+    margin: 8px 0;            /* Espacio entre cada campo */
+}
+
+/* Inputs del formulario CUADROS DONDE VA LA INFO*/
+.panel-formulario form input {
+    width: 100%;                       /* El input ocupa todo el ancho */
+    padding: 16px 10px 8px 10px;       /* Más espacio arriba para el label flotante */
+    border: 1px solid var(--primary-200); /* Borde azul grisáceo que se ve normal */
+    border-radius: 5px;                /* Bordes redondeados */
+    background: var(--accent-100);         /* Fondo de cada cuadro a llenar */
+    font-size: 14px;                   /* Tamaño de texto cómodo */
+    outline: none;                     /* Quita borde azul del navegador */
+}
+
+/* Cuando el usuario hace focus en el input */
+/* El borde cambia de color */
+.panel-formulario form input:focus{
+    border-color: var(--primary-100); /* borde que se ve al escribir */
+}
+
+/* Label flotante */
+/* Este texto empieza dentro del input */
+.campo-input label{
+    position: absolute;        /* Permite moverlo dentro del input */
+    left: 10px;                /* Separación desde la izquierda */
+    top: 14px;                 /* Posición inicial dentro del input */
+    color: var(--primary-200);               /* Gris claro estilo Material */
+    font-size: 14px;           /* Tamaño igual al texto del input */
+    pointer-events: none;      /* Permite hacer click directo al input */
+    transition: 0.2s ease all; /* Animación suave del movimiento */
+    padding: 0 4px;            /* Pequeño espacio alrededor del texto */
+    font-style: italic;
+}
+
+/* Cuando el usuario hace click en el input */
+/* El label se mueve hacia arriba */
+.campo-input input:focus + label{
+    top: -8px;                 /* Se mueve arriba del input */
+    font-size: 13px;           /* Se hace más pequeño */
+    color: var(--text-cafesito); /* Cambia a azul */
+    background: var(--accent-100); /* Letra que se aparece al dar clic en el form*/
+}
+
+/* Cuando el input tiene texto escrito */
+/* El label permanece arriba */
+.campo-input input:not(:placeholder-shown) + label{
+    top: -8px;                 /* Permanece arriba */
+    font-size: 13px;           /* Tamaño pequeño */
+}
+
+/* Botón principal del formulario */
+.panel-formulario form button {
+    padding: 12px;                    /* Espacio interno del botón */
+    margin-top: 20px;                 /* Separación del input superior */
+    border-radius: 5px;               /* Bordes redondeados */
+    background-color: var(--ver-boton); /* Fondo del botón */
+    border: 0.5px solid var(--text-cafesito);  
+    color: var(--text-200);           /* Texto blanco */
+    cursor: pointer;                  /* Cambia el cursor a manito */
+    font-weight: bold;                /* Texto en negrita */
+    transition: background 0.3s;      /* Transición suave al cambiar color */
+}
+
+/* Hover sobre botón */
+.panel-formulario form button:hover {
+    background-color: var(--tocar-boton); /* Cambia a color más oscuro al pasar el mouse */
+    color: var(--text-blanco);
+}
+
+/* Panel deslizable */
+/* Contiene el panel azul que se mueve al cambiar de login a registro */
+.panel-deslizante {
+    position: absolute;                 
+    top: 0;
+    left: 50%;                                  /* Comienza en la mitad derecha */
+    width: 50%;                                 /* Ocupa la mitad derecha */
+    height: 100%;                        
+    overflow: hidden;                           /* Oculta contenido sobrante */
+    transition: transform 0.6s ease-in-out;     /* Transición suave para deslizar */
+}
+
+/* Transformaciones al activar el panel */
+.panel-animado.activo .panel-formulario.login {
+    transform: translateX(100%);    /* Login se desplaza hacia la derecha */
+}
+
+.panel-animado.activo .panel-formulario.registro {
+    transform: translateX(100%);    /* Registro se desplaza a la vista */
+    opacity: 1;                     /* Se vuelve visible */
+    z-index: 5;                     /* Se pone encima del login */
+}
+
+.panel-animado.activo .panel-deslizante {
+    transform: translateX(-100%);       /* El panel azul se desplaza a la izquierda */
+}
+
+/* Contenido de info */
+.contenido-deslizante {
+    background: linear-gradient(to right, var(--ver-boton), var(--degr-300)); /* Degradado azul */
+    color: b;           /* Texto blanco */
+    position: relative;                
+    left: -100%;                       /* Comienza fuera de la vista */
+    height: 100%;                      
+    width: 200%;                        /* Doble ancho para incluir panel izquierdo y derecho */
+    display: flex;                      
+    transition: transform 0.6s ease-in-out; 
+}
+
+/* Transformación al activar animación */
+.panel-animado.activo .contenido-deslizante {
+    transform: translateX(50%);        
+}
+
+/* Panel izquierdo y derecho dentro del slider azul */
+.contenido-izquierdo,
+.contenido-derecho {
+    position: absolute;                 
+    width: 50%;                         
+    height: 100%;                        
+    display: flex;                       
+    flex-direction: column;              
+    align-items: center;                 
+    justify-content: center;             
+    padding: 40px;                     
+    text-align: center;
+}
+
+/* Espaciado entre el título y el texto descriptivo */
+.contenido-izquierdo h1,
+.contenido-derecho h1{
+    margin-bottom: 20px; /* separa el h1 del párrafo que está debajo */
+}
+
+/* Ajuste inicial del panel izquierdo */
+.contenido-izquierdo {
+    left: 0;                /* Alinea a la izquierda de su contenedor */
+    transform: translateX(0); /* No desplaza nada, queda centrado dentro de su 50% */
+}
+
+/* Ajuste del panel derecho */
+.contenido-derecho {
+    right: 0;                            
+}
+
+/* Botones ghost del panel azul */
+.boton-ghost {
+    background: var(--ver-boton);             
+    border: 0.5px solid var(--text-cafesito);  
+    padding: 12px 24px;                  
+    border-radius: 5px;                  
+    cursor: pointer;                     
+    font-weight: bold;                    
+    margin-top: 20px;                     
+}
+
+/* Hover de botones ghost */
+.boton-ghost:hover {
+    background-color: var(--tocar-boton); /* Fondo semitransparente al pasar mouse */
+    color: var(--text-blanco);
+}
+
+/* Logo de los paneles */
+/* Imagen que aparece dentro de los paneles azul e inputs */
+.logo {
+    width: 150px;                         /* Tamaño fijo del logo */
+    height: auto;                          /* Mantiene proporción */
+    margin: 25px 0 15px 0;                 /* Separación superior e inferior */
+}
+
+
+
+colores pasteles
+/* colores sugeridos para materias */
+#FFD6E0 /* rosa */
+#D6EFFF /* azul claro */
+#DFFFD6 /* verde suave */
+#FFF5D6 /* amarillo pastel */
+#E6D6FF /* lila */
+#D6FFF5 /* aqua */
+#FFE4D6 /* durazno */
+#F0F0F0 /* gris claro */
+#D6E4FF /* azul lavanda */
+#FFE0F7 /* rosa claro */m

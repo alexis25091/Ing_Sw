@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./estilos/index.css"> 
+    <link rel="stylesheet" href="./estilos/template.css"> 
+</head>
+
+<body>
+    <div class="panel-animado" id="panel-animado">
+
+        <!-- Sección del formulario para crear cuenta-->
+        <div class="panel-formulario registro">
+            <form method="POST" action="./recursos/procesar_inicio.php">
+                
+                <!-- Campo oculto que indica al backend que es un registro -->
+                <input type="hidden" name="accion" value="registro">
+                <h2>Crear cuenta</h2>
+
+                <!-- Campos para capturar los datos del usuario -->
+                <div class="campo-input">
+                    <input type="text" name="nombre" required placeholder=" ">
+                    <label class="form-label">Nombre de usuario</label>
+                </div>
+                <div class="campo-input">
+                    <input type="email" name="email" required placeholder=" ">
+                    <label class="form-label">Correo electrónico</label>
+                </div>
+                <div class="campo-input">
+                    <input type="password" name="password" id="password" required placeholder=" ">
+                    <label class="form-label">Contraseña</label>
+                    <span class="toggle-pass" onclick="togglePassword('password', this)">Ver</span>
+                </div>
+                <div class="campo-input">
+                    <input type="password" name="confirmarPassword" id="confirmarPassword" required placeholder=" ">
+                    <label class="form-label">Confirma tu contraseña</label>
+                    <span class="toggle-pass" onclick="togglePassword('confirmarPassword', this)">Ver</span>
+                </div>
+
+                <!-- Botón para enviar el formulario -->
+                <button type="submit">Registrarse</button>
+            </form>
+        </div>
+
+        <!-- Sección del formulario de inicio de sesión -->
+        <div class="panel-formulario login">
+            <form method="POST" action="./recursos/procesar_inicio.php">
+                
+                <!-- Campo oculto que indica al backend que es un login -->
+                <input type="hidden" name="accion" value="login">
+                <h2>Iniciar sesión</h2>
+
+                <!-- Campos básicos para autenticación -->
+                <div class="campo-input">
+                    <input type="email" name="email" required placeholder=" ">
+                    <label class="form-label">Correo electrónico</label>
+                </div>
+                <div class="campo-input">
+                    <input type="password" name="password" id="passwordLogin" required placeholder=" ">
+                    <label class="form-label">Contraseña</label>
+                    <span class="toggle-pass" onclick="togglePassword('passwordLogin', this)">Ver</span>
+                </div>
+
+                <!-- Texto para recuperar contraseña-->
+                <p id="recuperar-link" onclick="abrirModalRecuperar()"> ← Recuperar contraseña</p>
+
+                <!-- Botón para enviar los datos de acceso -->
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+
+        <!-- Panel deslizante visual (cambiar entre login y registro) -->
+        <div class="panel-deslizante">
+            <div class="contenido-deslizante">
+
+                <!-- Lado izquierdo del panel -->
+                <div class="contenido-izquierdo">
+                    <h1>¡Hola!</h1>
+                    <p>Registra tus datos personales para crear una cuenta y unirte a NexTask</p>
+                    <img src="./imagenes/LogoTransp.png" alt="logo" class="logo">
+
+                    <!-- Botón que activa la vista de login -->
+                    <button class="boton-ghost" id="boton-login">Iniciar sesión</button>
+                </div>
+
+                <!-- Lado derecho del panel -->
+                <div class="contenido-derecho">
+                    <h1>Bienvenido de vuelta</h1>
+                    <p>Ingresa tus datos para ingresar nuevamente a NexTask</p>
+                    <img src="./imagenes/LogoTransp.png" alt="logo" class="logo">
+
+                    <!-- Botón que activa la vista de registro -->
+                    <button class="boton-ghost" id="boton-registro">Registrarse</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para recuperar la contraseña -->
+    <div id="modal-recuperar">
+        <div class="modal-content">
+
+            <span class="cerrar" onclick="cerrarModalRecuperar()">&times;</span>
+            <h3>Recuperar contraseña</h3>
+            <form action="./recursos/recuperar_contra.php" method="POST">
+
+                <div class="campo-input">
+                    <label class="form-label">Nombre con el que te registraste: </label>
+                    <input type="text" name="nombre" required placeholder="Nombre">
+                </div>
+
+                <div class="campo-input">
+                    <label class="form-label">Ingresa tu correo: </label>
+                    <input type="email" name="email" required placeholder="Correo">
+                </div>
+
+                <div class="botones">
+                    <button type="button" onclick="cerrarModalRecuperar()">Cancelar</button>
+                    <button type="submit">Recuperar</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Notificación flotante -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Archivo que controla la animación y el cambio entre formularios -->
+    <script src="./script/index.js"></script>
+
+</body>
+</html>
