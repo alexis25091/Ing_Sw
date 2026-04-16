@@ -1,0 +1,453 @@
+/* Cuadro que contiene las 3 columas */
+.kanban {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 30px;
+    margin: auto;
+}
+
+/* Las 3 columnas */
+.columna {
+    background: var(--accent-200);
+    border-radius: 14px;
+    width: 300px;
+    height: 75vh;
+    max-height: 80vh;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* Titulos de las columnas */
+.columna h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: var(--primary-100);
+    letter-spacing: 1px;
+}
+
+/* Rectangulo que pone el scroll cuando hay varias tareas */
+.lista-tareas {
+    overflow-y: auto;
+}
+
+/* Tarjeta de informacion */
+.card {
+    padding: 14px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+}
+
+/* Cursor sobre la tarjeta de informacion */
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    background: var(--degr-300);
+}
+
+/* Titulo materia de cada tarjeta */
+.card h3 {
+    color: var(--primary-100);
+    margin-bottom: 5px;
+}
+
+/* Informacion (dificultad, hora, dia) de la tarjeta */
+.card p {
+    font-size: 0.9rem;
+    color: var(--text-cafesito);
+}
+
+/* Boton agregar tarea */
+.btn-agregar {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-100);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 30px;
+    font-weight: bold;
+    font-size: 13px;
+    color: var(--text-blanco);
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(106,137,156,0.5);
+    transition: 0.3s;
+}
+
+/* Cursor sobre el boton de agregar tarea */
+.btn-agregar:hover {
+    background: var(--degr-400);
+}
+
+
+/* Modal - ventana transparente que aparece encima del contenido principal */
+.modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    background: rgba(0,0,0,.45);
+    backdrop-filter: blur(3px);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    pointer-events: none;
+}
+
+/* PERO el contenido del modal sí sigue funcionando */
+.modal .modal-content {
+    pointer-events: auto;
+}
+
+.modal.active {
+    display: flex;
+}
+
+/* Título de los modales */
+.modal h3 {
+    margin-bottom: 15px;
+    text-align: center;
+    color: var(--text-negro);
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+#modal-eliminar h3 {
+    margin-top: 20px;
+    margin-bottom: 25px;
+    text-align: center;
+    color: var(--text-cafesito);
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+}
+
+#modal-form .modal-content,
+#modal-estado .modal-content,
+#modal-eliminar .modal-content  { 
+    background: var(--accent-200);
+    border-radius: 14px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.95);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Modal - cuadro en general tamaños distintos*/
+#modal-estado .modal-content {
+    max-width: 380px;
+    padding: 25px;
+
+}
+#modal-form .modal-content {
+    padding: 30px 0px 30px 30px;
+    max-width: 780px;
+}
+
+#modal-eliminar .modal-content {
+    max-width: 380px;
+    padding: 25px;
+
+}
+
+/* Titulo de cada seccion (labels) del formulario */
+.seccion label{
+    font-size: 14px;
+    margin-bottom: -6px;
+    color: var(--text-negro);
+    text-align: left;
+    display: block;
+}
+
+/* Animación al abrir */
+#modal-form .modal-content,
+#modal-estado .modal-content,
+#modal-eliminar .modal-content  {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Botón cerrar (X) */
+#modal-form .cerrar, 
+#modal-estado .cerrar, 
+#modal-eliminar .cerrar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--text-cafesito);
+}
+
+/* Formulario para agregar tarea */
+.form-tarea {
+    width: 95%;
+    max-width: 900px;
+    animation: aparecer 0.3s ease;
+}
+
+/* Grid - se hacen 2 columnas */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+/* Secciones */
+.seccion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-self: start;
+}
+
+/* Inputs - seleccionar opcion (materia, detalles, estado, hora) */
+.form-tarea input,
+.form-tarea select,
+.form-tarea textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--primary-200);
+    background: var(--accent-100);
+    font-size: 12px;
+    transition: 0.2s;
+    margin-bottom: 10px;
+}
+
+/* Opcion seleccionada */
+.form-tarea input:focus,
+.form-tarea select:focus,
+.form-tarea textarea:focus {
+    border-color: var(--primary-100);
+    background: var(--accent-200);
+    outline: none;
+}
+
+/* Textarea (descripcion) */
+.form-tarea textarea {
+    min-height: 30px;
+    resize: none;
+}
+
+/* Barra de dificultad */
+.dificultad-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+/* Area de botones en el formulario (tiene los 2 botones) */
+.botones-full {
+    grid-column: span 2;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* Grupo izquierdo (cancelar + eliminar) */
+.botones-form {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* Botones dentro del modal */
+#modal-form button,
+#modal-eliminar button{
+    padding: 8px 15px;
+    border-radius: 6px;
+    background: var(--ver-boton);
+    border: 0.5px solid var(--text-cafesito);
+    color: var(--text-blanco);
+    cursor: pointer;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+/* Contenedor de botones */
+#modal-form .botones,
+#modal-eliminar .botones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    flex-wrap: nowrap;
+}
+
+/* Botones igual estilo */
+#modal-form button,
+#modal-eliminar button{
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 0.5px solid var(--text-cafesito);
+    cursor: pointer;
+    background: var(--ver-boton);
+    color: var(--text-blanco);
+}
+
+#modal-form button:hover,
+#modal-eliminar button:hover{
+    background: var(--tocar-boton);
+    color: var(--text-blanco);
+
+}
+
+/* Barra de dificultad*/
+#range-dif {
+    margin-top: 5px;
+}
+
+/* Texto de detalles de la tarea */
+#detalle-tarea {
+    margin: 10px 0;
+    font-size: 0.9rem;
+    color: var(--text-cafesito);
+}
+
+
+/* Boton editar (izquierda) */
+#editar-tarea-modal {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    margin-top: 8px;
+    background: transparent; 
+    border: none;
+    outline: none;
+    font-weight: bold;
+    color: var(--primary-100);
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+#editar-tarea-modal:hover {
+    text-decoration: underline;
+    font-weight: bold;
+
+}
+
+#editar-tarea-modal:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Botones en general para cambiar de estado */
+.estado-btn {
+    width: 100%;
+    margin: 6px 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Colores del los botones de cambio de estado */
+.estado-btn[data-estado="asignadas"] {
+    background: var(--primary-100);
+}
+.estado-btn[data-estado="enproceso"] {
+    background: var(--degr-200);
+}
+.estado-btn[data-estado="terminadas"] {
+    background: var(--degr-400);
+}
+
+/* Boton con el estado que no se puede cambiar */
+.estado-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Cursor sobre los botones de estado */
+.estado-btn:hover:not(:disabled) {
+    opacity: 0.85;
+}
+
+/* Texto de "no hay actividades" */
+.sin-tareas {
+    text-align: center;
+    opacity: 0.6;
+    margin-top: 20px;
+    font-style: italic;
+    color: var(--text-cafesito);
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(40%);
+    cursor: pointer;
+}
+
+/* Botón cerrar (X) */
+#modal-form .cerrar,
+#modal-eliminar .cerrar {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--text-cafesito);
+}
+
+
+#modal-form .modal-content p {
+    margin-bottom: 20px;
+    color: var(--primary-100);
+    font-size: 12px;
+    pointer-events: none;
+    font-style: italic;
+    text-align:center; 
+}
+
+
+/* Notificación flotante */
+.toast {
+    background-color: var(--degr-400);
+    color: #fff;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 99999 !important; /* MÁS alto que TODO */
+}
+
+/* Cuando aparece */
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+#modal-eliminar .botones-form {
+    display: flex;
+    justify-content: center; /* centrados */
+    gap: 15px; /* separación bonita */
+    margin-top: 15px;
+}
+
+#modal-form button,
+#modal-eliminar button {
+    min-width: 110px;
+    text-align: center;
+}
+

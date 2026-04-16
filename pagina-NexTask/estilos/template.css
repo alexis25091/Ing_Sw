@@ -1,0 +1,164 @@
+/* Paleta de colores y tipografia 
+
+/* Colores globales y fuente principal de toda la página */
+:root {
+    --primary-100: #7A8C99;
+    --primary-200: #A9BCC6;
+    --primary-300: #C5D6E0;
+    --accent-100: #E1EBF0;
+    --accent-200: #F7FAFC;
+    --accent-300: #F2F7FA;
+    --text-negro: #2A2A2A;
+    --text-blanco: #FFFFFF;
+    --text-cafesito: #7B7977;
+    --tocar-boton: #1B5B7E;
+    --ver-boton: #7A8C99;
+    --gris: #7E7E7E;
+    --degr-100: #689EC2;
+    --degr-200: #909BAE;
+    --degr-300: #D5E8EF;
+    --degr-400: #1B5B7E;
+    --fuente-principal: 'Arial', sans-serif;
+}
+
+/* Reset general */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--fuente-principal);
+}
+
+body {
+    background: linear-gradient(90deg, var(--degr-100) -40%, var(--primary-200) 50%, var(--degr-300) 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: var(--accent-300);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    position: relative;
+    z-index: 1000;
+}
+
+/* LOGO */
+.logo {
+    font-weight: bold;
+    font-size: 1.6rem;
+    color: var(--primary-100);
+    letter-spacing: 1px;
+}
+
+/* NAV LINKS */
+.navbar nav {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: var(--text-negro);
+    font-weight: 500;
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+/* EFECTO LINEA ABAJO */
+.navbar nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0%;
+    height: 2px;
+    background: var(--primary-100);
+    transition: width 0.3s ease;
+}
+
+.navbar nav a:hover::after {
+    width: 100%;
+}
+
+.navbar nav a:hover {
+    color: var(--primary-100);
+}
+
+/* LINK ACTIVO */
+.navbar nav a.activo {
+    font-weight: bold;
+    color: var(--primary-100);
+}
+
+.navbar nav a.activo::after {
+    width: 100%;
+}
+
+/* ===== USUARIO ===== */
+.usuario {
+    position: relative;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-negro);
+}
+
+/* NOMBRE USUARIO */
+.toggle-usuario {
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.toggle-usuario:hover {
+    background: var(--accent-100);
+}
+
+/* ===== SUBMENU ===== */
+.submenu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: var(--accent-300);
+    border-radius: 10px;
+    list-style: none;
+    padding: 8px 0;
+    min-width: 150px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+
+    display: none;
+}
+
+/* MOSTRAR */
+.submenu.active {
+    display: block;
+}
+
+/* ITEMS */
+.submenu li {
+    padding: 10px 15px;
+}
+
+.submenu li a {
+    text-decoration: none;
+    color: var(--text-negro);
+    display: block;
+    width: 100%;
+    transition: background 0.2s;
+}
+
+/* HOVER ITEMS */
+.submenu li:hover {
+    background: var(--accent-100);
+}
+
+.logo_completo img {
+    height: 40px;
+    width: auto;
+    display: block;
+}

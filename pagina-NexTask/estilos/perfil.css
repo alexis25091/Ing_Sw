@@ -1,0 +1,505 @@
+/* Contenedor principal */
+.perfil-container{
+    width: 80%;
+    max-width: 1000px;
+    margin: 30px auto;
+    background: var(--accent-300);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+
+    display: flex;
+    flex-direction: column;
+    height: 85vh; /* 👈 altura fija tipo app */
+    overflow: hidden; /* 👈 evita que todo crezca */
+}
+
+.perfil-container h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Seccion de mostrar datos del perfil */
+.perfil-box{
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    margin-bottom: 30px;
+    border-bottom: 3px solid var(--primary-200);
+    border-radius: 5px;
+    background: var(--accent-100);
+}
+
+/* Imagen del perfil */
+.avatar{
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-200);
+}
+
+/* Alinear columnas */
+.perfil-izq{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.perfil-der{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Nombre del perfil */
+.perfil-der h2{
+    color: var(--text-negro);
+    margin-bottom: 15px;
+}
+
+/* Datos del perfil */
+.perfil-der p{
+    color: var(--text-cafesito);
+    margin-bottom: 15px;
+}
+
+/* Boton de editar perfil */
+#btn-editar{
+    background: var(--ver-boton);
+    border: 0.5px solid var(--text-cafesito);
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--text-blanco);
+    font-size: 0.85em;
+}
+
+/* Pasar por el boton de editar perfil */
+#btn-editar:hover{
+    background: var(--tocar-boton);
+    color: var(--text-blanco);
+}
+
+/* Boton para agregar materia */
+#btn-agregar{
+    display: block;
+    margin: 0 auto 20px auto;
+    background: var(--ver-boton);
+    color: var(--text-blanco);
+    border: none;
+    padding: 10px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin-top: 20px;
+}
+
+/* Al pasar por el boton para agregar materia*/
+#btn-agregar:hover{
+    background: var(--tocar-boton);
+}
+
+/* AQUII Lista de materias actuales */
+.materia-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: 0.25s;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+/* Al pasar por la materia*/
+.materia-item:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Iconos */
+.materia-item button{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+/* Contenedor para boton de salir de sesion */
+.logout-container{
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Boton para salir de sesion */
+.btn-logout{
+    background: var(--ver-boton);
+    color: var(--text-blanco);
+    padding: 12px 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 0.85em;
+    font-style: bold;
+}
+
+/* Al pasar por el boton para salir de sesion */
+.btn-logout:hover{
+    background: var(--tocar-boton);
+    color: var(--text-blanco);
+}
+
+
+/* Modal transparente */
+#modal-user,
+#modal-materia {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    padding: 15px;
+}
+
+/* Activar modal */
+#modal-user.active,
+#modal-materia.active {
+    display: flex;
+}
+
+/* Título modal */
+#modal-user h3,
+#modal-materia h3 {
+    margin-bottom: 25px;
+    text-align: center;
+    color: var(--text-negro);
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* Modal - Textos tipo label */
+#modal-user label,
+#modal-materia label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: var(--text-negro);
+}
+
+/* Caja del modal */
+#modal-user .modal-content,
+#modal-materia .modal-content {
+    background: var(--accent-300);
+    border-radius: 16px;
+    padding: 30px 35px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+/* Animación al abrir */
+#modal-user.active .modal-content,
+#modal-materia.active .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Botón cerrar (X) */
+#modal-user .cerrar,
+#modal-materia .cerrar {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--text-cafesito);
+}
+
+/* Inputs dentro del modal */
+.modal-content input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid var(--primary-200);
+    color: var(--text-negro);
+    font-size: 12px;
+    background: var(--accent-100);
+    font-style: italic;
+}
+
+/* Botones dentro del modal */
+.modal-content button {
+    padding: 8px 15px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    align-items: center;
+    font-size: 0.95rem;
+
+}
+
+/* Botón guardar */
+.modal-content button[type="submit"],
+.modal-content button[type="button"] {
+    background: var(--ver-boton);
+    color: var(--text-blanco);
+}
+
+/* Al ponerse sobre el botón guardar */
+.modal-content button[type="submit"]:hover,
+.modal-content button[type="button"]:hover {
+    background: var(--tocar-boton);
+    color: var(--text-blanco);
+}
+
+/* Contenedor de botones */
+#modal-user .botones,
+#modal-materia .botones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    flex-wrap: nowrap;
+}
+
+/* Contenedor de colores */
+.color-picker{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+}
+
+/* Cada color */
+.color-option{
+    width: 100%;
+    height: 35px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.2s;
+}
+
+/* Hover bonito */
+.color-option:hover{
+    transform: scale(1.05);
+}
+
+/* Color seleccionado */
+.color-option.selected{
+    border: 3px solid var(--primary-100);
+    transform: scale(1.1);
+}
+
+/* nunca se encoge */
+.perfil-box{
+    flex-shrink: 0;
+}
+
+
+/* Materias con scroll */
+.materias-box{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Lista scrolleable */
+.lista-materias{
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Scroll bonito */
+.lista-materias::-webkit-scrollbar{
+    width: 6px;
+}
+
+.lista-materias::-webkit-scrollbar-thumb{
+    background: var(--primary-200);
+    border-radius: 10px;
+}
+
+/*  TOAST  */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #333;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+
+/* cuando se muestra */
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Texto de "no hay materias" */
+.lista-materias p {
+    text-align:center; 
+    color:var(--text-cafesito); 
+    margin-top:15px;
+}
+
+
+#modal-user .modal-content p {
+    margin-bottom: 10px;
+    color: var(--primary-100);
+    font-size: 12px;
+    pointer-events: none;
+    font-style: italic;
+    text-align:center; 
+}
+
+#modal-eliminar-materia h3 {
+    margin-top: 20px;
+    margin-bottom: 25px;
+    text-align: center;
+    color: var(--text-cafesito);
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+}
+
+#modal-eliminar-materia .modal-content {
+    background: var(--accent-200);
+    border-radius: 14px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.95);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+#modal-eliminar-materia .modal-content {
+    max-width: 380px;
+    padding: 25px;
+}
+
+#modal-eliminar-materia .modal-content  {
+    transform: scale(1);
+    opacity: 1;
+}
+
+
+/* Modal eliminar materia */
+#modal-eliminar-materia.modal {
+    display: none;           /* oculto por defecto */
+    position: fixed;         /* para superponerse a todo */
+    inset: 0;                /* top:0; right:0; bottom:0; left:0 */
+    background: rgba(0,0,0,0.5); /* fondo oscuro semi-transparente */
+    justify-content: center; /* centrar horizontal */
+    align-items: center;     /* centrar vertical */
+    z-index: 1000;
+}
+
+#modal-eliminar-materia.modal.active {
+    display: flex;           /* mostrar al agregar clase active */
+}
+
+#modal-eliminar-materia .cerrar {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--text-cafesito);
+}
+
+#modal-eliminar-materia button{
+    padding: 8px 15px;
+    border-radius: 6px;
+    background: var(--ver-boton);
+    border: 0.5px solid var(--text-cafesito);
+    color: var(--text-blanco);
+    cursor: pointer;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+#modal-eliminar-materia .botones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    flex-wrap: nowrap;
+}
+
+#modal-eliminar-materia button{
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 0.5px solid var(--text-cafesito);
+    cursor: pointer;
+    background: var(--ver-boton);
+    color: var(--text-blanco);
+}
+
+#modal-eliminar-materia button:hover{
+    background: var(--tocar-boton);
+    color: var(--text-blanco);
+
+}
+
+#modal-eliminar-materia .cerrar {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--text-cafesito);
+}
+
+#modal-eliminar-materia .botones-form {
+    display: flex;
+    justify-content: center; /* centrados */
+    gap: 15px; /* separación bonita */
+    margin-top: 15px;
+}
+#modal-eliminar-materia button {
+    min-width: 110px;
+    text-align: center;
+}
+
+/* Ver contraseña */
+.toggle-pass{
+    position: absolute;
+    right: 12px;
+    top: 45%;
+    transform: translateY(10%);
+    
+    font-size: 12px;
+    color: var(--primary-100);
+    cursor: pointer;
+    user-select: none;
+    font-weight: 500;
+}
+
+.toggle-pass:hover{
+    text-decoration: underline;
+}
