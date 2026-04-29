@@ -264,10 +264,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*  VALIDACIÓN FORM  */
     form.addEventListener('submit', (e) => {
-        if (range.dataset.movido !== "true") {
+
+        const materia = form.materia.value;
+        const detalles = form.detalles.value.trim();
+        const estado = form.estado.value;
+        const fecha = form.fecha_limite.value;
+        const hora = form.hora_limite.value;
+        const idEdicion = form.querySelector('[name="id"]').value;
+
+        if (!materia){
             e.preventDefault();
-            mostrarToast("⚠️ Selecciona la dificultad");
-        }
+            mostrarToast("⚠️ Falta llenar: Materia");
+        }//if
+
+        if(!detalles){
+            e.preventDefault();
+            mostrarToast("⚠️ Falta llenar: Detalles");
+        }//if
+
+        if(!estado){
+            e.preventDefault();
+            mostrarToast("⚠️ Falta llenar: Estado");
+        }//if
+
+        if(!fecha){
+            e.preventDefault();
+            mostrarToast("⚠️ Falta llenar: Fecha limite");
+        }//if
+
+        if(!hora){
+            e.preventDefault();
+            mostrarToast("⚠️ Falta llenar: Hora limite");
+        }//if
+            
+        if (range.dataset.movido !== "true" && !idEdicion) {
+            e.preventDefault();
+            mostrarToast("⚠️ Falta llenar: Dificultad");
+        }//if
     });
 
 
