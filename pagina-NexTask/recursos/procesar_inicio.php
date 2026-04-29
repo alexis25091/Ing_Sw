@@ -20,29 +20,37 @@
             $password = $_POST['password'];
             $confirmar = $_POST['confirmarPassword'];
 
-            // Verifica que las contraseñas coincidan
+            //Verifica que las contraseñas coincidan
             if ($password !== $confirmar) {
                 header("Location: ../index.html?error=confirm&panel=registro");
                 exit;
             }
 
-            // $password_hash = password_hash($password, PASSWORD_DEFAULT); // SI SE QUIERE EL HASH EN LA CONTRASEÑA
+            //Verificar si el correo o el nombre ya existen
+            $sql_check = "SELECT id FROM usuarios WHERE email = ? OR nombre = ? LIMIT 1";
+            $stmt_check = $conn->prepare($sql_check);
+            $stmt_check->bind_param("ss", $email, $nombre);
+            $stmt_check->execute();
+            $resultado_check = $stmt_check->get_result();
 
-            // Guarda la contraseña (sin hash por ahora)
-            $password_hash = $password;
+            if ($resultado_check->num_rows > 0) {
+                // Si hay coincidencia, mandamos el error de duplicado
+                header("Location: ../index.html?error=duplicado&panel=registro");
+                $stmt_check->close();
+                exit; 
+            }
+            $stmt_check->close();
 
-            // Inserta usuario en la base de datos
+            //Si pasó las validaciones, procedemos a insertar
             $sql = "INSERT INTO usuarios (nombre, email, password) VALUES (?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sss", $nombre, $email, $password_hash);
+            $stmt->bind_param("sss", $nombre, $email, $password); // Recuerda usar hash después
 
             if ($stmt->execute()) {
                 header("Location: ../index.html?registro=ok");
-                exit;
             } else {
-                echo "Error: " . $stmt->error; // Muestra error si falla
+                echo "Error: " . $stmt->error;
             }
-
             $stmt->close();
         }
 
