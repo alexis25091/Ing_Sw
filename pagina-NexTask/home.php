@@ -137,6 +137,8 @@
                         data-materia="<?php echo htmlspecialchars($t['materia_nombre'] ?? 'Materia eliminada'); ?>"
                         data-materia-id="<?php echo $t['materia_id']; ?>" 
                         data-dificultad="<?php echo $t['dificultad']; ?>"
+                        data-peso="<?php echo $t['peso']; ?>"
+                        data-riesgo="<?php echo $t['riesgo'] ; ?>"
                         data-fecha="<?php echo $t['fecha_limite']; ?>"
                         data-detalles="<?php echo htmlspecialchars($t['detalles']); ?>"
                         data-estado="<?php echo $t['estado']; ?>">
@@ -200,12 +202,27 @@
                 <div class="seccion">
                     <label>Fecha límite: </label><input type="date" name="fecha_limite" required />
                     <label>Hora límite (formato 24hrs): </label>
-                        <input type="time" name="hora_limite" required /> 
+                    <input type="time" name="hora_limite" required /> 
                     <!-- Slider de dificultad -->
                     <div class="dificultad-container">
-                        <label>Nivel de dificultad: <span class= "valor-dificultad" id="valor-dificultad"> 1 - 10 </span> </label>
+                        <label>Nivel de dificultad: <span class="valor-dificultad" id="valor-dificultad"> 1 - 10 </span> </label>
                         <input type="range" name="dificultad" min="1" max="10" id="range-dif" data-movido="false">
                     </div>
+                </div>
+
+                <!-- Peso en la calificación (Se acomoda a la izquierda) -->
+                <div class="mb-3">
+                    <label for="peso" class="form-label">
+                        Peso en la calificación dentro de la materia: <span id="valor-peso">5</span>
+                    </label>
+                    <input type="range" class="form-range" id="peso" name="peso" min="1" max="10" value="5" oninput="document.getElementById('valor-peso').innerText = this.value">
+                </div>
+
+                <div class="mb-3">
+                    <label for="riesgo" class="form-label">
+                        Riesgo de reprobación si no se entrega: <span id="valor-riesgo">5</span>
+                    </label>
+                    <input type="range" class="form-range" id="riesgo" name="riesgo" min="1" max="10" value="5" oninput="document.getElementById('valor-riesgo').innerText = this.value">
                 </div>
 
                 <!-- Botones -->

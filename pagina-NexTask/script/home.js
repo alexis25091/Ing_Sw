@@ -118,10 +118,15 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("titulo-form").textContent = "Agregar nueva tarea";
         btnEliminar.style.display = "none";
 
-        // Reset dificultad
+        // Reset dificultad, peso y riesgo
         range.value = 1;
         valor.textContent = "1";
         range.dataset.movido = "false";
+
+        document.getElementById('peso').value = 5;
+        document.getElementById('valor-peso').innerText = 5;
+        document.getElementById('riesgo').value = 5;
+        document.getElementById('valor-riesgo').innerText = 5;
 
         modal.classList.add('active');
     };
@@ -176,9 +181,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         });
 
-        // Bloquear edición si está terminada (SI SE QUIERE DESACTIVAR EDITAR EN "TERMINADAS")
-        // editar.disabled = (c.dataset.estado === "terminadas");
-
         modalEstado.classList.add('active');
     });
 
@@ -229,10 +231,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         form.materia.value = tarea.dataset.materiaId;
 
-        // Cargar dificultad
+        // Cargar dificultad, peso y riesgo desde el dataset de la tarjeta
         range.value = tarea.dataset.dificultad;
         valor.textContent = tarea.dataset.dificultad;
         range.dataset.movido = "true";
+
+        document.getElementById('peso').value = tarea.dataset.peso;
+        document.getElementById('valor-peso').innerText = tarea.dataset.peso;
+        
+        document.getElementById('riesgo').value = tarea.dataset.riesgo;
+        document.getElementById('valor-riesgo').innerText = tarea.dataset.riesgo;
 
         // Separar fecha y hora
         const partes = tarea.dataset.fecha.split(" ");
@@ -275,32 +283,32 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!materia){
             e.preventDefault();
             mostrarToast("⚠️ Falta llenar: Materia");
-        }//if
+        }
 
         if(!detalles){
             e.preventDefault();
             mostrarToast("⚠️ Falta llenar: Detalles");
-        }//if
+        }
 
         if(!estado){
             e.preventDefault();
             mostrarToast("⚠️ Falta llenar: Estado");
-        }//if
+        }
 
         if(!fecha){
             e.preventDefault();
             mostrarToast("⚠️ Falta llenar: Fecha limite");
-        }//if
+        }
 
         if(!hora){
             e.preventDefault();
             mostrarToast("⚠️ Falta llenar: Hora limite");
-        }//if
+        }
             
         if (range.dataset.movido !== "true" && !idEdicion) {
             e.preventDefault();
             mostrarToast("⚠️ Falta llenar: Dificultad");
-        }//if
+        }
     });
 
 

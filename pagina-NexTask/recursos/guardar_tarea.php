@@ -9,7 +9,13 @@
     // Obtiene datos del formulario
     $id = $_POST['id'] ?? null;
     $materia_id = intval($_POST['materia']);
-    $dificultad = $_POST['dificultad'];
+    $dificultad = intval($_POST['dificultad']);
+    
+    // --- NUEVAS VARIABLES WSJF ---
+    $peso = intval($_POST['peso']);
+    $riesgo = intval($_POST['riesgo']);
+    // -----------------------------
+
     $fecha = $_POST['fecha_limite'];
     $hora = $_POST['hora_limite'];
     $detalles = $_POST['detalles'];
@@ -24,13 +30,17 @@
         $sql = "UPDATE tareas SET 
             materia_id=?,
             dificultad=?,
+            peso=?,
+            riesgo=?,
             fecha_limite=?,
             detalles=?,
             estado=?
             WHERE id=? AND user_id=?";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iisssii", $materia_id, $dificultad, $fecha_completa, $detalles, $estado, $id, $user_id);
+        
+        // Se cambió a "iiiisssii" (4 enteros, 3 strings, 2 enteros)
+        $stmt->bind_param("iiiisssii", $materia_id, $dificultad, $peso, $riesgo, $fecha_completa, $detalles, $estado, $id, $user_id);
         $stmt->execute();
 
         $msg = "editado"; // Para mostrar toast
@@ -38,19 +48,23 @@
     } else {
 
         // Crear nueva tarea
-        $sql = "INSERT INTO tareas (materia_id, dificultad, fecha_limite, detalles, estado, user_id)
-                VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO tareas (materia_id, dificultad, peso, riesgo, fecha_limite, detalles, estado, user_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iisssi", $materia_id, $dificultad, $fecha_completa, $detalles, $estado, $user_id);
+        
+        // Se cambió a "iiiisssi" (4 enteros, 3 strings, 1 entero)
+        $stmt->bind_param("iiiisssi", $materia_id, $dificultad, $peso, $riesgo, $fecha_completa, $detalles, $estado, $user_id);
         $stmt->execute();
 
         $msg = "guardado"; // Crear nueva tarea
     }
-    // Para mostrar toast
+    
+    // Cierra conexión
+    $stmt->close();
     $conn->close();
 
-    // Cierra conexión
+    // Redirige al inicio con mensaje
     header("Location: ../home.php?msg=" . $msg);
     exit;
 ?>

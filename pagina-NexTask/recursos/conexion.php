@@ -6,7 +6,7 @@
     $host = "127.0.0.1";
     $usuario = "root";   // usuario de MySQL
     $password = "";    // contraseña
-    $bd = "nexTask";
+    $bd = "nexttask";
 
     // Crea una nueva conexión a MySQL usando mysql
     $conn = new mysqli($host, $usuario, $password, $bd);

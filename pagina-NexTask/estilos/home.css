@@ -157,7 +157,8 @@
 }
 
 /* Titulo de cada seccion (labels) del formulario */
-.seccion label{
+.seccion label,
+.mb-3 label {
     font-size: 14px;
     margin-bottom: -6px;
     color: var(--text-negro);
@@ -303,9 +304,10 @@
 
 }
 
-/* Barra de dificultad*/
-#range-dif {
+/* Barra de sliders */
+#range-dif, #peso, #riesgo {
     margin-top: 5px;
+    width: 100%;
 }
 
 /* Texto de detalles de la tarea */
